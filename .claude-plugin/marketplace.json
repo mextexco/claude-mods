@@ -6,5 +6,11 @@
   "metadata": {
     "description": "Claude Code plugins by mextexco"
   },
-  "plugins": []
+  "plugins": [
+    {
+      "name": "warp-emerald",
+      "source": "./plugins/warp-emerald",
+      "description": "Warp Future Emerald V3 theme: deep emerald surfaces, neon green, a grid backdrop and a walking pixel crab."
+    }
+  ]
 }
