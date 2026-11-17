@@ -38,6 +38,14 @@ In the desktop app, where `/plugin` does not run: click + next to the prompt box
 
 Answer `y` to add the marketplace, then pick the user scope. The theme shows in sessions started after that. If another theme plugin (such as theme-examples) has a theme applied, clear it first with `/custom-theme off`.
 
+There's only one theme per session, so another plugin's "off" also clears this one. Bring it back in the current session with:
+
+```text
+/warp-emerald
+```
+
+`/warp-emerald off` clears it for the current session.
+
 ## Publish a plugin
 
 Add a plugin directory to this repository (for example, `plugins/my-plugin/`) with its own `.claude-plugin/plugin.json` manifest, then add an entry to `.claude-plugin/marketplace.json`:

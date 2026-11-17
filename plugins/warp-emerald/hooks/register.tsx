@@ -4,6 +4,7 @@ import { makeColors } from './make-colors.js'
 
 const PLUGIN = 'warp-emerald'
 const SCENE_ID = 'emerald-grid'
+const COMMAND = 'warp-emerald'
 
 // design.md: Warp Future Emerald V3。背景 #061a0c、アクセント #00ff41、白文字。ダーク専用。
 const { theme, problems } = makeColors({
@@ -99,6 +100,16 @@ export const register: Register = on => {
       void $.ui.toast(`${PLUGIN}: ${unpainted}`)
     }
 
+    // 登録に失敗してもテーマは適用する。
+    try {
+      await $.command.register({
+        name: COMMAND,
+        description: 'Warp Emerald テーマをこのセッションに適用する（"off" で解除）',
+      })
+    } catch (error) {
+      void $.ui.toast(`${PLUGIN}: /${COMMAND} is not available (${String(error)})`)
+    }
+
     const set = await $.theme.set(LOOK)
 
     if (!set.isDrawn) {
@@ -106,6 +117,19 @@ export const register: Register = on => {
     }
 
     return next(e)
+  })
+
+  // /warp-emerald で再適用、/warp-emerald off で解除。ほかのテーマプラグインが消したときに戻す用。
+  on('command.run', { command: COMMAND }, async ($, e) => {
+    if (e.args.trim().toLowerCase() === 'off') {
+      await $.theme.clear()
+
+      return { text: 'Warp Emerald を解除した。' }
+    }
+
+    const set = await $.theme.set(LOOK)
+
+    return { text: set.isDrawn ? 'Warp Emerald を適用した。' : `適用したが描画されない: ${set.reason}` }
   })
 
   on('ui.render', { component: 'Backdrop' }, ($, e, next) => {
