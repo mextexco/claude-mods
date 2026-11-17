@@ -22,6 +22,8 @@ Then list available plugins with:
 
 A theme for the Claude desktop app, based on the Warp Future Emerald V3 design system: deep emerald surfaces (`#061a0c`), neon terminal green (`#00ff41`) and white text. Behind the chat it draws an 18px grid with a slow green scanline, a small status HUD in the top-right corner, and a pixel crab (from [mextexco/kani](https://github.com/mextexco/kani)) walking back and forth above the prompt box. Dark mode only. Terminals and editors don't draw themes.
 
+![warp-emerald in the Claude desktop app](docs/warp-emerald.png)
+
 Install at the prompt of a terminal session:
 
 ```text
